@@ -65,7 +65,7 @@ const siteContent = {
       cta: { text: 'Hubungi', link: 'mailto:corporate@bambulogy.com' }
     },
     hero: {
-      backgroundImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80',
+      backgroundImage: 'https://bambulogyindonesia-my.sharepoint.com/:i:/p/syamsurizal_munaf/IQDLIy36zD9LQJoAXQVhkuaZAcUaz1TvfH4muRFB7siRWPE?e=2Mvnb3',
       title: 'Membangun Destinasi Luar Biasa',
       subtitle: 'Menghubungkan Hospitality, Alam, dan Inovasi di seluruh Indonesia.',
       primary: { text: 'Jelajahi Bisnis Kami', link: '#businesses' },
@@ -210,7 +210,7 @@ const siteContent = {
       cta: { text: 'Contact', link: 'mailto:corporate@bambulogy.com' }
     },
     hero: {
-      backgroundImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80',
+      backgroundImage: 'https://bambulogyindonesia-my.sharepoint.com/:i:/p/syamsurizal_munaf/IQDLIy36zD9LQJoAXQVhkuaZAcUaz1TvfH4muRFB7siRWPE?e=2Mvnb3',
       title: 'Building Extraordinary Destinations',
       subtitle: 'Connecting Hospitality, Nature, and Innovation Across Indonesia.',
       primary: { text: 'Explore Our Businesses', link: '#businesses' },
