@@ -1,0 +1,20 @@
+---
+// Provider component that initializes i18n on the client side
+---
+<script is:inline>
+  // Initialize language from localStorage on page load
+  (function() {
+    const LANGUAGE_KEY = 'bambulogy-language';
+    const stored = localStorage.getItem(LANGUAGE_KEY);
+    
+    if (stored && (stored === 'en' || stored === 'id')) {
+      // Language preference exists, page will use it
+      window.__bambulogy_lang = stored;
+    } else {
+      // Set default language
+      const defaultLang = 'en';
+      localStorage.setItem(LANGUAGE_KEY, defaultLang);
+      window.__bambulogy_lang = defaultLang;
+    }
+  })();
+</script>
