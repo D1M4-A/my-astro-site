@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Ecosystem from '../../components/Ecosystem.astro';
+import Brands from '../../components/Brands.astro';
+import Stats from '../../components/Stats.astro';
+import Sustainability from '../../components/Sustainability.astro';
+import News from '../../components/News.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import Footer from '../../components/Footer.astro';
+import { getPageContent, normalizeLang } from '../../lib/siteContent';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'id' } }, { params: { lang: 'en' } }];
+}
+
+const locale = normalizeLang(Astro.params.lang);
+const content = getPageContent(locale);
+---
+
+<BaseLayout title={content.meta.title} description={content.meta.description} lang={locale}>
+  <Navbar data={content.header} lang={locale} />
+  <main class="pt-24">
+    <Hero data={content.hero} lang={locale} />
+
+    <div id="about">
+      <About data={content.about} lang={locale} />
+    </div>
+
+    <Ecosystem data={content.businesses} lang={locale} />
+
+    <Brands data={content.brands} lang={locale} />
+
+    <Stats data={content.statistics} lang={locale} />
+
+    <Sustainability data={content.sustainability} lang={locale} />
+
+    <News data={content.news} lang={locale} />
+
+    <ContactCTA data={content.contact} lang={locale} />
+
+    <Footer data={content.footer} lang={locale} />
+  </main>
+</BaseLayout>

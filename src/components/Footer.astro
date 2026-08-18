@@ -1,6 +1,11 @@
 ---
-const { data } = Astro.props;
+const { data, lang = 'id' } = Astro.props;
 const year = new Date().getFullYear();
+const contactTitle = lang === 'en' ? 'Contact' : 'Kontak';
+const followTitle = lang === 'en' ? 'Follow' : 'Ikuti';
+const addressLabel = lang === 'en' ? 'Address' : 'Alamat';
+const emailLabel = lang === 'en' ? 'Email' : 'Email';
+const phoneLabel = lang === 'en' ? 'Phone' : 'Telepon';
 ---
 <footer class="site-footer bg-background text-textdark">
   <div class="container grid md:grid-cols-3 gap-6 items-start">
@@ -17,14 +22,14 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <div class="font-semibold mb-2">Contact</div>
-      <div class="text-sm text-gray-600">Address: {data?.company?.address || 'Jl. Cendrawasih V No. 125, Sawah Baru, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413.'}</div>
-      <div class="text-sm text-gray-600">Email: {data?.company?.email || 'Reservation@bambulogyIndonesia.com'}</div>
-      <div class="text-sm text-gray-600">Phone: {data?.company?.phone || '085861214132'}</div>
+      <div class="font-semibold mb-2">{contactTitle}</div>
+      <div class="text-sm text-gray-600">{addressLabel}: {data?.company?.address || 'Jl. Cendrawasih V No. 125, Sawah Baru, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413.'}</div>
+      <div class="text-sm text-gray-600">{emailLabel}: {data?.company?.email || 'Reservation@bambulogyIndonesia.com'}</div>
+      <div class="text-sm text-gray-600">{phoneLabel}: {data?.company?.phone || '085861214132'}</div>
     </div>
 
     <div>
-      <div class="font-semibold mb-2">Follow</div>
+      <div class="font-semibold mb-2">{followTitle}</div>
       <div class="flex flex-wrap gap-3 text-gray-600">
         {(data?.social?.length ? data.social : [{ name: 'LinkedIn' }, { name: 'Instagram' }, { name: 'Facebook' }]).map(item => (
           <span>{item.name}</span>

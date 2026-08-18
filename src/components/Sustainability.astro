@@ -1,5 +1,8 @@
 ---
-const { data } = Astro.props;
+const { data, lang = 'id' } = Astro.props;
+const title = data?.title || (lang === 'en' ? 'Sustainability — People · Nature · Future' : 'Keberlanjutan — Manusia · Alam · Masa Depan');
+const description = data?.description || (lang === 'en' ? 'Designing with respect for place and people.' : 'Merancang dengan menghormati tempat dan manusia.');
+const buttonLabel = data?.button || (lang === 'en' ? 'Learn about our approach' : 'Pelajari pendekatan kami');
 ---
 <section id="sustainability" class="section bg-white">
   <div class="container grid md:grid-cols-2 gap-8 items-center">
@@ -7,9 +10,9 @@ const { data } = Astro.props;
       <img src={data?.image || 'https://images.unsplash.com/photo-1505691723518-36a5d0d28a1a?auto=format&fit=crop&w=1400&q=80'} alt="Bamboo architecture" class="w-full h-80 object-cover rounded-lg shadow-md" />
     </div>
     <div class="fade-in">
-      <h3 class="text-3xl font-semibold mb-4">{data?.title || 'Sustainability — People · Nature · Future'}</h3>
-      <p class="text-gray-700 mb-6">{data?.description || 'Designing with respect for place and people.'}</p>
-      <a href="#" class="btn-secondary">Learn about our approach</a>
+      <h3 class="text-3xl font-semibold mb-4">{title}</h3>
+      <p class="text-gray-700 mb-6">{description}</p>
+      <a href="#" class="btn-secondary">{buttonLabel}</a>
     </div>
   </div>
 </section>

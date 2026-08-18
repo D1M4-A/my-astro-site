@@ -6,15 +6,15 @@ const { data } = Astro.props;
 
 const aboutTitle = lang === 'en'
   ? data?.title || 'About Company'
-  : data?.titleId || 'Tentang Perusahaan';
+  : data?.titleId || data?.title || 'Tentang Perusahaan';
 
 const aboutDescription = lang === 'en'
   ? data?.description || 'Bambulogy Group is a hospitality and resort management company that creates unique stays and curated outdoor experiences across Indonesia.'
-  : data?.descriptionId || 'Bambulogy Group adalah perusahaan manajemen perhotelan dan resort yang menciptakan penginapan unik dan pengalaman outdoor kurasi di seluruh Indonesia.';
+  : data?.descriptionId || data?.description || 'Bambulogy Group adalah perusahaan manajemen perhotelan dan resort yang menciptakan penginapan unik dan pengalaman outdoor kurasi di seluruh Indonesia.';
 
 const contactText = lang === 'en'
-  ? 'Contact Corporate'
-  : 'Hubungi Korporat';
+  ? data?.cta?.label || 'Contact Corporate'
+  : data?.cta?.labelId || data?.cta?.label || 'Hubungi Korporat';
 ---
 <section class="section bg-background">
   <div class="container grid md:grid-cols-2 gap-10 items-center">
@@ -23,7 +23,7 @@ const contactText = lang === 'en'
       <div class="text-lg text-gray-700 mb-6 whitespace-pre-line">
         {aboutDescription}
       </div>
-      <a href="#contact" class="btn-primary">{contactText}</a>
+      <a href={data?.cta?.href || '#contact'} class="btn-primary">{contactText}</a>
     </div>
 
     <div class="fade-in">

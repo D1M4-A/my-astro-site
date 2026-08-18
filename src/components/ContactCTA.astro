@@ -1,7 +1,13 @@
+---
+const { data, lang = 'id' } = Astro.props;
+const title = data?.title || (lang === 'en' ? "Let's Build Something Extraordinary Together" : 'Mari Bangun Sesuatu yang Luar Biasa Bersama');
+const description = data?.description || (lang === 'en' ? 'For partnerships, collaborations, and corporate opportunities, reach out to our corporate team.' : 'Untuk kemitraan, kolaborasi, dan peluang korporat, silakan hubungi tim korporat kami.');
+const buttonLabel = data?.button || (lang === 'en' ? 'Contact Bambulogy Group' : 'Hubungi Bambulogy Group');
+---
 <section id="contact" class="section bg-[#F9F7F2]">
   <div class="container text-center">
-    <h3 class="text-3xl font-semibold mb-4">Let's Build Something Extraordinary Together</h3>
-    <p class="text-gray-700 mb-6">For partnerships, collaborations, and corporate opportunities, reach out to our corporate team.</p>
-    <a href="https://wa.me/6285861214132" target="_blank" rel="noopener noreferrer" class="btn-primary">Contact Bambulogy Group</a>
+    <h3 class="text-3xl font-semibold mb-4">{title}</h3>
+    <p class="text-gray-700 mb-6">{description}</p>
+    <a href="https://wa.me/6285861214132" target="_blank" rel="noopener noreferrer" class="btn-primary">{buttonLabel}</a>
   </div>
 </section>

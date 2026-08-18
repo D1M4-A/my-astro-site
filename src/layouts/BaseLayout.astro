@@ -1,9 +1,10 @@
 ---
 import I18nProvider from '../components/I18nProvider.astro';
-const { title = 'Bambulogy Group', description = 'Bambulogy Group — Building extraordinary destinations that connect hospitality, nature, and technology across Indonesia.' } = Astro.props;
+
+const { title = 'Bambulogy Group', description = 'Bambulogy Group — Building extraordinary destinations that connect hospitality, nature, and technology across Indonesia.', lang = 'id' } = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

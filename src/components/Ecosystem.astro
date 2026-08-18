@@ -1,36 +1,50 @@
 ---
-import { t, getCurrentLanguage } from '../lib/i18n';
+import { getCurrentLanguage } from '../lib/i18n';
 
 const lang = getCurrentLanguage();
+const { data } = Astro.props;
 
-const destinations = [
+const defaultDestinations = [
   {
-    title: lang === 'en' ? 'Adem Anyer Park' : 'Adem Anyer Park',
-    subtitle: lang === 'en' ? 'Beachfront Escape for Families, Communities, and Corporate Gatherings.' : 'Pelarian Tepi Pantai untuk Keluarga, Komunitas, dan Acara Korporat.',
-    description: lang === 'en' ? 'A coastal destination offering cabins, glamping, campervan areas, and event spaces designed for unforgettable family and corporate experiences.' : 'Destinasi pesisir yang menawarkan kabin, glamping, area campervan, dan ruang acara yang dirancang untuk pengalaman keluarga dan korporat yang tak terlupakan.',
+    title: 'Adem Anyer Park',
+    subtitle: lang === 'en'
+      ? 'Beachfront Escape for Families, Communities, and Corporate Gatherings.'
+      : 'Pelarian Tepi Pantai untuk Keluarga, Komunitas, dan Acara Korporat.',
+    description: lang === 'en'
+      ? 'A coastal destination offering cabins, glamping, campervan areas, and event spaces designed for unforgettable family and corporate experiences.'
+      : 'Destinasi pesisir yang menawarkan kabin, glamping, area campervan, dan ruang acara yang dirancang untuk pengalaman keluarga dan korporat yang tak terlupakan.',
     href: '/destinations/adem-anyer-park',
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80',
     badge: lang === 'en' ? 'Beachfront Resort' : 'Resort Tepi Pantai'
   },
   {
-    title: lang === 'en' ? 'Cabinite Pangalengan' : 'Cabinite Pangalengan',
-    subtitle: lang === 'en' ? 'Private Mountain Cabins Surrounded by Nature.' : 'Kabin Gunung Pribadi Dikelilingi Alam.',
-    description: lang === 'en' ? 'An exclusive retreat in the cool highlands with pine forest views, outdoor activities, and memorable nature-based gatherings.' : 'Retret eksklusif di dataran tinggi yang sejuk dengan pemandangan hutan pinus, aktivitas outdoor, dan pertemuan berbasis alam yang berkesan.',
+    title: 'Cabinite Pangalengan',
+    subtitle: lang === 'en'
+      ? 'Private Mountain Cabins Surrounded by Nature.'
+      : 'Kabin Gunung Pribadi Dikelilingi Alam.',
+    description: lang === 'en'
+      ? 'An exclusive retreat in the cool highlands with pine forest views, outdoor activities, and memorable nature-based gatherings.'
+      : 'Retret eksklusif di dataran tinggi yang sejuk dengan pemandangan hutan pinus, aktivitas outdoor, dan pertemuan berbasis alam yang berkesan.',
     href: '/destinations/cabinite-pangalengan',
     image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80',
     badge: lang === 'en' ? 'Mountain Retreat' : 'Retret Gunung'
   }
 ];
+
+const destinations = data?.destinations || defaultDestinations;
+const sectionLabel = data?.sectionLabel || (lang === 'en' ? 'Our destinations' : 'Destinasi kami');
+const title = data?.title || (lang === 'en' ? 'Discover Bambulogy Places' : 'Temukan Tempat Bambulogy');
+const ctaLabel = data?.cta || (lang === 'en' ? 'View all experiences' : 'Lihat semua pengalaman');
 ---
 <section id="businesses" class="section bg-[#F8F5F0]">
   <div class="container">
     <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div>
-        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#6A7A61]">{lang === 'en' ? 'Our destinations' : 'Destinasi Kami'}</p>
-        <h3 class="text-3xl md:text-5xl font-bold text-[#102920]">{lang === 'en' ? 'Discover Bambulogy Places' : 'Temukan Tempat-Tempat Bambulogy'}</h3>
+        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#6A7A61]">{sectionLabel}</p>
+        <h3 class="text-3xl md:text-5xl font-bold text-[#102920]">{title}</h3>
       </div>
       <a href="/destinations/adem-anyer-park" class="inline-flex items-center gap-2 text-sm font-semibold text-[#102920] transition hover:text-[#264e3f]">
-        {lang === 'en' ? 'View all experiences' : 'Lihat semua pengalaman'}
+        {ctaLabel}
         <span aria-hidden="true">→</span>
       </a>
     </div>
@@ -60,7 +74,7 @@ const destinations = [
 
             <div class="mt-6 flex items-center justify-between gap-4">
               <span class="inline-flex items-center justify-center rounded-full bg-[#102920] px-5 py-3 text-sm font-semibold text-white transition group-hover:bg-[#234a3b]">
-                {lang === 'en' ? 'Explore Destination →' : 'Jelajahi Destinasi →'}
+                {lang === 'en' ? 'Explore Destination' : 'Jelajahi Destinasi'} →
               </span>
             </div>
           </div>
