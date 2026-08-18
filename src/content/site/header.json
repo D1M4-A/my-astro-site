@@ -1,0 +1,12 @@
+{
+  "siteName": "Bambulogy",
+  "logoUrl": "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=80&q=60",
+  "menu": [
+    { "label": "Home", "link": "/" },
+    { "label": "Businesses", "link": "#businesses" },
+    { "label": "Sustainability", "link": "#sustainability" },
+    { "label": "News", "link": "#news" },
+    { "label": "Contact", "link": "#contact" }
+  ],
+  "cta": { "text": "Contact", "link": "mailto:corporate@bambulogy.com" }
+}

@@ -1,0 +1,10 @@
+---
+const { value = '', onChangeId = 'imgUrl' } = Astro.props;
+---
+<div class="border rounded p-3 bg-white">
+  <label class="block text-xs text-gray-600 mb-2">Image URL</label>
+  <input id={onChangeId} type="text" class="w-full p-2 border rounded" value={value} oninput={`document.getElementById('${onChangeId}-preview').src = this.value || document.getElementById('${onChangeId}-preview').dataset.default;`} />
+  <div class="mt-3">
+    <img id={`${onChangeId}-preview`} data-default={'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60'} src={value || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60'} alt="preview" class="w-full h-48 object-cover rounded" />
+  </div>
+</div>

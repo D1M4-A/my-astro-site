@@ -1,0 +1,53 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Login — Bambulogy Group</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="min-h-screen flex items-center justify-center bg-[#F9F7F2]">
+    <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Admin Login</h2>
+      <form id="loginForm" class="flex flex-col gap-3">
+        <label class="text-sm text-gray-600">Email atau Username</label>
+        <input id="email" type="text" class="p-3 border rounded" value="admin@bambulogygroup.com" />
+        <label class="text-sm text-gray-600">Password</label>
+        <input id="password" type="password" class="p-3 border rounded" value="admin12345" />
+        <div id="msg" class="text-sm text-red-600"></div>
+        <button type="submit" class="btn-primary mt-2">Login</button>
+      </form>
+    </div>
+
+    <script type="module">
+      const form = document.getElementById('loginForm');
+      const msg = document.getElementById('msg');
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        msg.textContent='';
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        try{
+          // Client-side mock auth: validate against static users.json (safe for local dev)
+          const res = await fetch('/src/content/site/users.json');
+          const usersJson = await res.json();
+          const users = usersJson.users || [];
+          const user = users.find(u => (u.email === email || u.username === email) && u.password === password);
+          if (user) {
+            const token = `mock-token:${user.email}`;
+            localStorage.setItem('bambulogy_admin_token', token);
+            localStorage.setItem('bambulogy_admin_name', user.name || user.email);
+            window.location.href = '/admin/dashboard';
+          } else {
+            msg.textContent = 'Email atau password salah.';
+          }
+        } catch(err){
+          console.error(err);
+          msg.textContent = 'Terjadi kesalahan jaringan.';
+        }
+      });
+    </script>
+  </body>
+</html>

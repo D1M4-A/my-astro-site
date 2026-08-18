@@ -1,0 +1,31 @@
+{
+  "company": {
+    "name": "Bambulogy Group",
+    "description": "A diversified hospitality, tourism, property, lifestyle, and technology holding company.",
+    "address": "Jl. Cendrawasih V No. 125, Sawah Baru, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413.",
+    "email": "Reservation@bambulogyIndonesia.com",
+    "phone": "085861214132"
+  },
+  "links": {
+    "products": [
+      { "label": "Brands", "href": "/brands" },
+      { "label": "Business Units", "href": "/business" }
+    ],
+    "company": [
+      { "label": "About Us", "href": "/about" },
+      { "label": "Careers", "href": "/careers" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "legal": [
+      { "label": "Privacy Policy", "href": "/legal/privacy" },
+      { "label": "Terms of Use", "href": "/legal/terms" }
+    ]
+  },
+  "social": [
+    { "name": "LinkedIn" },
+    { "name": "Instagram" },
+    { "name": "Facebook" }
+  ],
+  "copyright": "© 2026 Bambulogy Group. All rights reserved.",
+  "cta": { "label": "Subscribe to newsletter", "href": "/subscribe" }
+}

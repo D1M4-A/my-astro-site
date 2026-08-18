@@ -1,0 +1,29 @@
+{
+  "title": "Sustainability & Impact",
+  "intro": "We embed sustainability into design, operations, and community partnership to create destinations that last.",
+  "description": "Designing with respect for place and people, Bambulogy Group prioritizes regenerative practices, local partnerships and low-impact architecture.",
+  "heroImage": "https://images.unsplash.com/photo-1505691723518-36a5d0d28a1a?auto=format&fit=crop&w=1600&q=80",
+  "goals": [
+    { "goal": "Net-zero operations", "target": "2035", "progress": 22 },
+    { "goal": "100% sustainable sourcing", "target": "2028", "progress": 45 },
+    { "goal": "Community training programs", "target": "Ongoing", "progress": 60 }
+  ],
+  "initiatives": [
+    {
+      "title": "Renewable energy pilots",
+      "summary": "Solar microgrids and energy-efficiency retrofits at select properties.",
+      "image": "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1600&q=80",
+      "link": "/sustainability/renewables"
+    },
+    {
+      "title": "Local sourcing & livelihoods",
+      "summary": "Working with local farmers and artisans to create resilient supply chains.",
+      "image": "https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=1600&q=80",
+      "link": "/sustainability/local-sourcing"
+    }
+  ],
+  "reports": [
+    { "year": 2025, "url": "/reports/sustainability-2025.pdf" }
+  ],
+  "contact": { "email": "sustainability@bambulogy.example" }
+}

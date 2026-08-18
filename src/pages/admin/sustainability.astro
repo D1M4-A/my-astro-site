@@ -1,0 +1,54 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sustainability — Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <script>if(!localStorage.getItem('bambulogy_admin_token')) window.location.href='/admin/login';</script>
+    <div class="flex">
+      <div class="w-64"><iframe src="/admin/dashboard" style="width:100%;height:100vh;border:none;"></iframe></div>
+      <div class="flex-1 p-8">
+        <h2 class="text-2xl font-semibold mb-4">Sustainability</h2>
+        <form id="form" class="grid gap-3 max-w-3xl">
+          <label class="text-sm text-gray-600">Title</label>
+          <input id="title" class="p-3 border rounded" />
+          <label class="text-sm text-gray-600">Description</label>
+          <textarea id="description" class="p-3 border rounded h-28"></textarea>
+          <label class="text-sm text-gray-600">Image URL</label>
+          <input id="image" class="p-3 border rounded" />
+          <label class="text-sm text-gray-600">Points (comma separated)</label>
+          <input id="points" class="p-3 border rounded" />
+          <div class="mt-4 flex gap-3"><button class="btn-primary">Save</button><div id="msg" class="text-sm text-green-600"></div></div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      async function load(){
+        const res = await fetch('/src/content/site/sustainability.json');
+        const data = await res.json();
+        document.getElementById('title').value = data.title || '';
+        document.getElementById('description').value = data.description || '';
+        document.getElementById('image').value = data.image || '';
+        document.getElementById('points').value = (data.points || []).join(', ');
+      }
+
+      document.getElementById('form').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const payload = { title: document.getElementById('title').value, description: document.getElementById('description').value, image: document.getElementById('image').value, points: document.getElementById('points').value.split(',').map(s=>s.trim()).filter(Boolean) };
+        const token = localStorage.getItem('bambulogy_admin_token');
+        const res = await fetch('/api/content?slug=sustainability', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+token }, body: JSON.stringify(payload) });
+        const data = await res.json();
+        const msg = document.getElementById('msg');
+        if(res.ok) { msg.textContent = 'Saved'; setTimeout(()=>msg.textContent='', 2500); }
+        else msg.textContent = data.error || 'Error';
+      });
+
+      load();
+    </script>
+  </body>
+</html>

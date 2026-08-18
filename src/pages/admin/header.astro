@@ -1,0 +1,154 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Header Editor — Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <script>
+      const token = localStorage.getItem('bambulogy_admin_token');
+      if(!token) window.location.href = '/admin/login';
+    </script>
+
+    <div class="flex">
+      <!-- Sidebar -->
+      <div class="w-64">
+        <iframe src="/admin/dashboard" style="width:100%;height:100vh;border:none;"></iframe>
+      </div>
+
+      <div class="flex-1 p-8">
+        <h2 class="text-2xl font-semibold mb-4">Edit Header</h2>
+        <form id="form" class="grid grid-cols-1 gap-3 max-w-2xl">
+          <label class="text-sm text-gray-600">Site Name</label>
+          <input id="siteName" class="p-3 border rounded" />
+
+          <label class="text-sm text-gray-600">Logo URL</label>
+          <input id="logoUrl" class="p-3 border rounded" />
+
+          <label class="text-sm text-gray-600">CTA Text</label>
+          <input id="ctaText" class="p-3 border rounded" />
+
+          <label class="text-sm text-gray-600">CTA Link</label>
+          <input id="ctaLink" class="p-3 border rounded" />
+
+          <div>
+            <label class="text-sm text-gray-600">Menu (JSON array)</label>
+            <textarea id="menu" class="p-3 border rounded h-40">[]</textarea>
+            <div class="text-xs text-gray-500 mt-2">Example: [&#123;"label":"Home","link":"/"&#125;,&#123;"label":"About","link":"/about"&#125;]</div>
+          </div>
+
+          <div class="flex gap-3 mt-4">
+            <button id="saveBtn" class="btn-primary">Save</button>
+            <button id="downloadBtn" type="button" class="btn-secondary">Download JSON</button>
+            <div id="msg" class="text-sm text-green-600"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      const form = document.getElementById('form');
+      const msg = document.getElementById('msg');
+
+      async function load(){
+        const res = await fetch('/src/content/site/header.json');
+        const data = await res.json();
+        document.getElementById('siteName').value = data.siteName || '';
+        document.getElementById('logoUrl').value = data.logoUrl || '';
+        document.getElementById('ctaText').value = data.cta?.text || '';
+        document.getElementById('ctaLink').value = data.cta?.link || '';
+        document.getElementById('menu').value = JSON.stringify(data.menu || [], null, 2);
+      }
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        msg.textContent='';
+        const payload = {
+          siteName: document.getElementById('siteName').value,
+          logoUrl: document.getElementById('logoUrl').value,
+          cta: { text: document.getElementById('ctaText').value, link: document.getElementById('ctaLink').value },
+          menu: JSON.parse(document.getElementById('menu').value || '[]')
+        };
+
+        try{
+          // Use FormData POST first (multipart/form-data) — sometimes more reliable than JSON in constrained dev environments
+          const token = localStorage.getItem('bambulogy_admin_token');
+          const fd = new FormData();
+          fd.append('siteName', payload.siteName || '');
+          fd.append('logoUrl', payload.logoUrl || '');
+          fd.append('ctaText', payload.cta?.text || '');
+          fd.append('ctaLink', payload.cta?.link || '');
+          fd.append('menu', JSON.stringify(payload.menu || []));
+          if (token) fd.append('token', token);
+
+          const res = await fetch('/api/save-header', { method: 'POST', body: fd });
+          let data = {};
+          try { data = await res.json(); } catch(e) {}
+          if(res.ok) { msg.textContent = 'Saved'; setTimeout(()=>msg.textContent='',2500); return; }
+          else { msg.textContent = (data && data.error) ? data.error + (data.details ? (': '+data.details) : '') : 'Error saving. Will try fallback.'; }
+        } catch(err){ console.error('POST save failed', err); msg.textContent = 'POST failed. Trying fallback...'; }
+
+        // Fallback: send as base64 via GET to avoid environments that strip POST bodies
+        try{
+          const toBase64 = (str)=>{
+            // handle unicode
+            return btoa(unescape(encodeURIComponent(str)));
+          };
+          const encoded = toBase64(JSON.stringify(payload));
+          // Try fetch first
+          try {
+            const res2 = await fetch('/api/save-header-get?d='+encodeURIComponent(encoded));
+            const data2 = await res2.json();
+            if(res2.ok) { msg.textContent = 'Saved (fallback)'; setTimeout(()=>msg.textContent='',2500); return; }
+          } catch(e){
+            // silent, will try form submit
+          }
+          // Final fallback: submit a GET form (ensures query reaches server in all browsers)
+          const formEl = document.createElement('form');
+          formEl.method = 'GET';
+          formEl.action = '/api/save-header-get';
+          formEl.style.display = 'none';
+          // include percent-encoded base64 'd' and also individual fields as fallback
+          const inputD = document.createElement('input');
+          inputD.type = 'hidden';
+          inputD.name = 'd';
+          // percent-encode to make sure special base64 chars don't get lost
+          inputD.value = encodeURIComponent(encoded);
+          formEl.appendChild(inputD);
+          const addField = (name, value) => { const i = document.createElement('input'); i.type='hidden'; i.name=name; i.value=value||''; formEl.appendChild(i); };
+          addField('siteName', document.getElementById('siteName').value);
+          addField('logoUrl', document.getElementById('logoUrl').value);
+          addField('ctaText', document.getElementById('ctaText').value);
+          addField('ctaLink', document.getElementById('ctaLink').value);
+          // Do NOT double-encode menu — pass raw JSON string and let browser encode it
+          addField('menu', document.getElementById('menu').value);
+          document.body.appendChild(formEl);
+          formEl.submit();
+        } catch(err){ console.error('Fallback failed', err); msg.textContent = 'All save attempts failed. Use Download JSON.'; }
+      });
+
+      document.getElementById('downloadBtn').addEventListener('click', ()=>{
+        const payload = {
+          siteName: document.getElementById('siteName').value,
+          logoUrl: document.getElementById('logoUrl').value,
+          cta: { text: document.getElementById('ctaText').value, link: document.getElementById('ctaLink').value },
+          menu: JSON.parse(document.getElementById('menu').value || '[]')
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'header.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      load();
+    </script>
+  </body>
+</html>

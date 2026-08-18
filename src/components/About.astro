@@ -1,0 +1,20 @@
+---
+const { data } = Astro.props;
+---
+<section class="section bg-background">
+  <div class="container grid md:grid-cols-2 gap-10 items-center">
+    <div class="fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{data?.title || 'About Company'}</h2>
+      <div class="text-lg text-gray-700 mb-6 whitespace-pre-line">
+        {data?.description || 'Bambulogy Group is a hospitality and resort management company that creates unique stays and curated outdoor experiences across Indonesia. We believe travel is not only about a destination but about creating meaningful memories through nature, comfort, and authentic experiences.\n\nOur mission is to develop nature-inspired destinations that combine exceptional hospitality, outdoor adventure, local culture, and sustainable tourism.'}
+      </div>
+      <a href="#contact" class="btn-primary">Contact Corporate</a>
+    </div>
+
+    <div class="fade-in">
+      <div class="card-glass">
+        <img src={data?.image || 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1400&q=80'} alt="Resort masterplan aerial" class="w-full h-64 object-cover rounded-lg shadow-md" />
+      </div>
+    </div>
+  </div>
+</section>

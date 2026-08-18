@@ -1,0 +1,14 @@
+---
+const { data } = Astro.props;
+const stats = data?.stats || [];
+---
+<section class="section bg-[#0F2D1E] text-white">
+  <div class="container grid grid-cols-1 md:grid-cols-4 gap-6 text-center py-12">
+    {stats.map(s => (
+      <div>
+        <div class="text-4xl font-extrabold">{s.number}</div>
+        <div class="mt-2 text-sm text-white/80">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</section>

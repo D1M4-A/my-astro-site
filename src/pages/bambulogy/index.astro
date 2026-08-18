@@ -1,0 +1,51 @@
+---
+import NavB from '../../components/bambulogy/NavB.astro';
+import HeroB from '../../components/bambulogy/HeroB.astro';
+import AboutB from '../../components/bambulogy/AboutB.astro';
+import DestinationsB from '../../components/bambulogy/DestinationsB.astro';
+import BusinessSolutionsB from '../../components/bambulogy/BusinessSolutionsB.astro';
+import WhyChooseB from '../../components/bambulogy/WhyChooseB.astro';
+import GalleryB from '../../components/bambulogy/GalleryB.astro';
+import TestimonialsB from '../../components/bambulogy/TestimonialsB.astro';
+import ContactB from '../../components/bambulogy/ContactB.astro';
+import FooterB from '../../components/bambulogy/FooterB.astro';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bambulogy Indonesia — Eco-luxury destinations</title>
+    <meta name="description" content="Bambulogy Indonesia develops sustainable tourism destinations that combine nature, comfort, local culture, and meaningful experiences." />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="bg-[#F4F0E6] text-[#2E2E2E] antialiased">
+    <NavB />
+
+    <main class="max-w-7xl mx-auto">
+      <HeroB />
+      <AboutB />
+      <DestinationsB />
+      <BusinessSolutionsB />
+      <WhyChooseB />
+      <GalleryB />
+      <TestimonialsB />
+      <ContactB />
+    </main>
+
+    <FooterB />
+
+    <script>
+      // small scroll reveal for .reveal
+      const reveal = () => {
+        const els = document.querySelectorAll('.reveal');
+        const onScroll = () => {
+          const h = window.innerHeight;
+          els.forEach(el => { if (el.getBoundingClientRect().top < h - 80) el.classList.add('revealed'); });
+        };
+        onScroll(); window.addEventListener('scroll', onScroll);
+      };
+      document.addEventListener('DOMContentLoaded', reveal);
+    </script>
+  </body>
+</html>

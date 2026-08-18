@@ -1,0 +1,31 @@
+{
+  "brands": [
+    {
+      "id": "adem-anyer-park",
+      "name": "Adem Anyer Park",
+      "description": "Beachfront resort with tropical landscape and an event venue designed for premium hospitality.",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+      "logo": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80",
+      "website": "/brands/adem-anyer-park",
+      "established": "2017"
+    },
+    {
+      "id": "cabinite-pangalengan",
+      "name": "Cabinite Pangalengan",
+      "description": "Luxury glamping in mountain forest with misty mornings — an intimate, immersive nature experience.",
+      "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
+      "logo": "https://images.unsplash.com/photo-1505691723518-36a2d7f9d1f8?auto=format&fit=crop&w=800&q=80",
+      "website": "/brands/cabinite-pangalengan",
+      "established": "2019"
+    },
+    {
+      "id": "bambu-resorts",
+      "name": "Bambu Resorts",
+      "description": "A collection of boutique resort properties emphasizing design, service, and local culture.",
+      "image": "https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1600&q=80",
+      "logo": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80",
+      "website": "/brands/bambu-resorts",
+      "established": "2021"
+    }
+  ]
+}

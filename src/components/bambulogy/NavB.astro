@@ -1,0 +1,21 @@
+---
+---
+<nav class="fixed top-0 left-0 right-0 bg-white/60 backdrop-blur z-40">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/bambulogy" class="font-serif text-xl text-[#32513E]">Bambulogy</a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#destinations" class="text-sm text-[#32513E] hover:text-[#4C6A52]">Destinations</a>
+      <a href="#solutions" class="text-sm text-[#32513E] hover:text-[#4C6A52]">Business Solutions</a>
+      <a href="#gallery" class="text-sm text-[#32513E] hover:text-[#4C6A52]">Gallery</a>
+      <a href="#contact" class="btn-primary bg-[#32513E] text-white px-4 py-2 rounded">Contact Us</a>
+    </div>
+    <div class="md:hidden">
+      <button id="menuBtn" class="p-2 border rounded">Menu</button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* small visible offset so content isn't hidden behind fixed nav */
+  :global(body) { padding-top: 72px; }
+</style>

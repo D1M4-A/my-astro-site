@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import PropertyAvailability from '../../components/PropertyAvailability.astro';
+import header from '../../content/site/header.json';
+import footer from '../../content/site/footer.json';
+
+const heroImage = 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80';
+const gallery = [
+  'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80'
+];
+const highlights = [
+  'Private Luxury Cabin',
+  'Pine Forest Escape',
+  'Trekking Experience',
+  'Campfire Gathering',
+  'Tea Experience',
+  'Outdoor Adventures',
+  'Nature Retreat'
+];
+const cabinTypes = [
+  { title: 'Forest View Cabin', description: 'Premium cabin with a private terrace overlooking the tranquil pine forest.', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Family Cabin', description: 'Spacious cabin layout designed for family moments and quality outdoor downtime.', image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Signature Retreat Cabin', description: 'Designed for couples and private gatherings seeking elevated mountain comfort.', image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80' }
+];
+const activities = [
+  'Guided trekking through scenic mountain trails',
+  'Evening campfire experiences under cool highland skies',
+  'Curated tea tasting and local flavor encounters',
+  'Nature-based team building and reflection sessions'
+];
+const retreatPrograms = [
+  'Private corporate retreat packages for leadership teams',
+  'Wellness weekend programs in the mountain air',
+  'Small-group bonding activities with local experiences',
+  'Custom itineraries for leadership and team reset journeys'
+];
+---
+<BaseLayout
+  title="Cabinite Pangalengan | Bambulogy Group"
+  description="Exclusive mountain cabins in Pangalengan with trekking, campfire experiences, tea experiences, and nature-based retreats."
+>
+  <Navbar data={header} />
+
+  <main class="pt-24">
+    <section class="relative overflow-hidden">
+      <img src={heroImage} alt="Cabinite Pangalengan" class="absolute inset-0 h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-[#102b1d]/85 via-[#102b1d]/55 to-[#102b1d]/20"></div>
+
+      <div class="container relative z-10 py-28 md:py-40">
+        <div class="max-w-3xl text-white">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-[#dceacb]">Bambulogy destination</p>
+          <h1 class="text-4xl font-bold leading-tight md:text-6xl">Cabinite Pangalengan</h1>
+          <p class="mt-5 max-w-2xl text-lg md:text-2xl text-white/90">
+            Private Mountain Cabins Surrounded by Nature.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#about" class="btn-primary">Explore Destination</a>
+            <a href="https://wa.me/6285861214132?text=Hello%20Bambulogy%2C%20I%20want%20to%20book%20Cabinite%20Pangalengan" target="_blank" rel="noopener noreferrer" class="btn-secondary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section bg-[#f9f7f4]">
+      <div class="container grid gap-10 md:grid-cols-2 md:items-center">
+        <div>
+          <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#58715d]">About destination</p>
+          <h2 class="text-3xl md:text-5xl font-bold text-[#102920]">Highland calm, designed for meaningful escapes.</h2>
+          <div class="mt-6 space-y-4 text-lg leading-8 text-gray-700">
+            <p>
+              Cabinite Pangalengan is an exclusive mountain retreat managed by Bambulogy Group. Located in the cool highlands of Pangalengan, the destination offers private cabins surrounded by pine forests and natural landscapes.
+            </p>
+            <p>
+              Guests can experience outdoor activities such as trekking, campfire gatherings, curated tea experiences, and nature-based adventures designed to create meaningful moments away from city life.
+            </p>
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[32px] border border-[#dfe7dd] bg-white p-4 shadow-[0_24px_90px_rgba(12,34,20,0.08)]">
+          <img src={heroImage} alt="Cabinite Pangalengan mountain view" class="h-[420px] w-full rounded-[24px] object-cover transition duration-700 hover:scale-[1.03]" />
+          <div class="mt-5 grid grid-cols-3 gap-4 text-center">
+            <div class="rounded-2xl bg-[#eff7f1] p-4">
+              <div class="text-2xl font-bold text-[#102920]">14°</div>
+              <div class="mt-1 text-xs uppercase tracking-[0.15em] text-gray-600">Avg. temp</div>
+            </div>
+            <div class="rounded-2xl bg-[#eff7f1] p-4">
+              <div class="text-2xl font-bold text-[#102920]">3k</div>
+              <div class="mt-1 text-xs uppercase tracking-[0.15em] text-gray-600">Forest views</div>
+            </div>
+            <div class="rounded-2xl bg-[#eff7f1] p-4">
+              <div class="text-2xl font-bold text-[#102920]">100%</div>
+              <div class="mt-1 text-xs uppercase tracking-[0.15em] text-gray-600">Nature focus</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-[#edf4ef]">
+      <div class="container">
+        <div class="mb-10">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#58715d]">Key experiences</p>
+          <h2 class="mt-2 text-3xl md:text-5xl font-bold text-[#102920]">A retreat for rest and reconnection</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {highlights.map((item) => (
+            <div class="rounded-[24px] border border-[#dfe9e0] bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#102920] text-sm font-bold text-white">✓</div>
+              <p class="text-lg font-semibold text-[#102920]">{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="container">
+        <div class="mb-10">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#58715d]">Cabin types</p>
+          <h2 class="mt-2 text-3xl md:text-5xl font-bold text-[#102920]">Choose your mountain hideaway</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {cabinTypes.map((item) => (
+            <article class="group overflow-hidden rounded-[28px] border border-[#eae5dc] bg-[#f9f6f2] shadow-[0_18px_60px_rgba(16,41,32,0.06)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_28px_70px_rgba(16,41,32,0.12)]">
+              <div class="overflow-hidden">
+                <img src={item.image} alt={item.title} class="h-72 w-full object-cover transition duration-700 group-hover:scale-110" />
+              </div>
+              <div class="p-6">
+                <h3 class="text-2xl font-bold text-[#102920]">{item.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-700">{item.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-[#f2f9f5]">
+      <div class="container grid gap-10 lg:grid-cols-2">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#58715d]">Nature activities</p>
+          <h2 class="mt-2 text-3xl md:text-5xl font-bold text-[#102920]">Explore the mountain</h2>
+          <div class="mt-6 space-y-4">
+            {activities.map((item) => (
+              <div class="flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                <div class="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#dfeee9] text-[#102920] font-bold">•</div>
+                <p class="text-base text-gray-700">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#58715d]">Retreat programs</p>
+          <h2 class="mt-2 text-3xl md:text-5xl font-bold text-[#102920]">Ideal for team reset</h2>
+          <div class="mt-6 space-y-4">
+            {retreatPrograms.map((item) => (
+              <div class="flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                <div class="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#dfeee9] text-[#102920] font-bold">✦</div>
+                <p class="text-base text-gray-700">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <PropertyAvailability
+      propertyName="Cabinite Pangalengan"
+      roomOptions={[
+        { label: 'Forest View Cabin', availability: 7 },
+        { label: 'Family Cabin', availability: 5 },
+        { label: 'Signature Retreat Cabin', availability: 4 }
+      ]}
+    />
+
+    <section class="section bg-white">
+      <div class="container">
+        <div class="mb-10">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#58715d]">Photo gallery</p>
+          <h2 class="mt-2 text-3xl md:text-5xl font-bold text-[#102920]">Moments in the pines</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {gallery.map((image, index) => (
+            <div class="overflow-hidden rounded-[24px] border border-[#eae5dc] bg-[#faf9f5] shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-lg">
+              <img src={image} alt={`Cabinite Pangalengan gallery ${index + 1}`} class="h-72 w-full object-cover transition duration-700 hover:scale-105" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-[#102b1d]">
+      <div class="container">
+        <div class="rounded-[32px] border border-white/10 bg-gradient-to-r from-[#102b1d] via-[#153d2e] to-[#1d4b3f] p-8 md:p-12 text-center text-white">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[#d9deb0]">Plan your retreat</p>
+          <h2 class="mt-4 text-3xl md:text-5xl font-bold">Reserve your cabin in the highlands.</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-lg text-white/80">
+            From private stays to team retreats, Cabinite Pangalengan delivers a premium mountain experience in a calming natural setting.
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/6285861214132?text=Hello%20Bambulogy%2C%20I%20want%20to%20book%20Cabinite%20Pangalengan" target="_blank" rel="noopener noreferrer" class="btn-primary bg-[#f8f3ea] text-[#102920] hover:opacity-95">Reserve Your Cabin</a>
+            <a href="/" class="btn-secondary border-white/30 text-white hover:bg-white/5">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer data={footer} />
+</BaseLayout>

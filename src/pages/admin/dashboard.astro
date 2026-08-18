@@ -1,0 +1,66 @@
+---
+import AdminLayout from '../../components/admin/AdminLayout.astro';
+import AdminSidebar from '../../components/admin/AdminSidebar.astro';
+import AdminTopbar from '../../components/admin/AdminTopbar.astro';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard — Bambulogy Group</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <script>
+      const token = localStorage.getItem('bambulogy_admin_token');
+      if(!token) window.location.href = '/admin/login';
+    </script>
+
+    <AdminLayout title="Dashboard">
+      <div slot="sidebar">
+        <AdminSidebar />
+      </div>
+      <div slot="topbar">
+        <AdminTopbar subtitle="Dashboard" />
+      </div>
+
+      <div>
+        <div class="max-w-6xl mx-auto">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-2xl font-semibold">Selamat datang, <span id="adminName">Admin</span></h2>
+              <p class="text-sm text-gray-600">Kelola konten situs Bambulogy Group dari panel ini.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="/" class="px-4 py-2 border rounded text-sm">View Website</a>
+              <button id="logoutBtn" class="px-4 py-2 bg-[#0F2D1E] text-white rounded">Logout</button>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="/admin/header" class="p-6 border rounded shadow hover:shadow-lg">Header</a>
+            <a href="/admin/hero" class="p-6 border rounded shadow hover:shadow-lg">Hero</a>
+            <a href="/admin/about" class="p-6 border rounded shadow hover:shadow-lg">About</a>
+            <a href="/admin/business-units" class="p-6 border rounded shadow hover:shadow-lg">Business Units</a>
+            <a href="/admin/brands" class="p-6 border rounded shadow hover:shadow-lg">Brands</a>
+            <a href="/admin/statistics" class="p-6 border rounded shadow hover:shadow-lg">Statistics</a>
+            <a href="/admin/sustainability" class="p-6 border rounded shadow hover:shadow-lg">Sustainability</a>
+            <a href="/admin/news" class="p-6 border rounded shadow hover:shadow-lg">News</a>
+            <a href="/admin/footer" class="p-6 border rounded shadow hover:shadow-lg">Footer</a>
+            <a href="/admin/settings" class="p-6 border rounded shadow hover:shadow-lg">Settings</a>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document.getElementById('adminName').textContent = localStorage.getItem('bambulogy_admin_name') || localStorage.getItem('bambulogy_admin_token') || 'Admin';
+        document.getElementById('logoutBtn').addEventListener('click', ()=>{
+          localStorage.removeItem('bambulogy_admin_token');
+          localStorage.removeItem('bambulogy_admin_name');
+          window.location.href = '/admin/login';
+        });
+      </script>
+
+    </AdminLayout>
+  </body>
+</html>

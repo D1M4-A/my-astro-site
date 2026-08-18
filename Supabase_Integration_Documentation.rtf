@@ -1,0 +1,162 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 Arial;}{\f1 Calibri;}}\fs24\f1
+\b Supabase Integration Documentation - Bambulogy Group\b0\par
+\par
+Dokumentasi ini berisi panduan lengkap integrasi Supabase scaffold yang telah ditambahkan ke proyek Bambulogy Group, petunjuk migrasi lokal, pengaktifan Supabase Auth, upload gambar, perilaku API, file penting, langkah keamanan, dan perintah siap pakai untuk Windows (PowerShell).\par
+\par
+----------------------------------------\par
+1) Ringkasan Singkat\par
+----------------------------------------\par
+- Proyek mendukung dua mode konten: Local JSON (default) dan Supabase-enabled (opsional).\par
+- Scaffold yang ditambahkan termasuk helper Supabase, SQL seed, skrip migrasi, .env.example, dan dokumentasi.\par
+- API konten sekarang akan mencoba membaca/menulis ke Supabase jika variabel env SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY diatur; bila tidak tersedia, akan fallback ke file JSON lokal.\par
+\par
+----------------------------------------\par
+2) File Penting (lokasi pada workspace)\par
+----------------------------------------\par
+- Helper Supabase: \par
+  C:/Users/Hype G12/my-astro-site/src/lib/supabase.ts\par
+- API content (fallback lokal + Supabase): \par
+  C:/Users/Hype G12/my-astro-site/src/pages/api/content.ts\par
+- Migration & SQL seed: \par
+  C:/Users/Hype G12/my-astro-site/scripts/seed_supabase.sql\par
+  C:/Users/Hype G12/my-astro-site/scripts/migrate_to_supabase.js\par
+- Env example: \par
+  C:/Users/Hype G12/my-astro-site/.env.example\par
+- Supabase README scaffold: \par
+  C:/Users/Hype G12/my-astro-site/README_SUPABASE.md\par
+- Package script (menjalankan migrasi): \par
+  C:/Users/Hype G12/my-astro-site/package.json (script: supabase:migrate)\par
+- Konten lokal (JSON): \par
+  C:/Users/Hype G12/my-astro-site/src/content/site/ (header.json, hero.json, about.json, businessUnits.json, brands.json, statistics.json, investment.json, sustainability.json, news.json, footer.json, users.json)\par
+\par
+----------------------------------------\par
+3) Persyaratan Awal\par
+----------------------------------------\par
+- Node >= 18\par
+- Jalankan: npm install\par
+- Jalankan dev server: npm run dev\par
+- Build: npm run build\par
+- Tailwind build (opsional): npm run css:build\par
+\par
+----------------------------------------\par
+4) Menyiapkan Supabase: Project & Kunci\par
+----------------------------------------\par
+- Di Supabase dashboard, buat project baru.\par
+- Catat: SUPABASE_URL, SUPABASE_ANON_KEY (opsional), SUPABASE_SERVICE_ROLE_KEY (sangat sensitif).\par
+\par
+----------------------------------------\par
+5) Menjalankan Migrasi Lokal (JSON -> Supabase)\par
+----------------------------------------\par
+Langkah ringkas:\par
+1. Salin .env.example menjadi .env di root proyek dan isi variabel: SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.\par
+2. Dua opsi untuk membuat schema dan migrasi data:\par
+\par
+Opsi A — Jalankan SQL seed manual (direkomendasikan):\par
+- Buka Supabase Dashboard -> SQL Editor.\par
+- Salin isi file: C:/Users/Hype G12/my-astro-site/scripts/seed_supabase.sql dan jalankan.\par
+- Tabel yang dibuat: public.site_content (slug TEXT PK, data JSONB, updated_at TIMESTAMPTZ) dan public.news (id UUID PK, title, short_description, cover_url, category, content JSONB, published_at).\par
+\par
+Opsi B — Jalankan skrip migrasi (menggunakan SERVICE_ROLE_KEY):\par
+- Pastikan .env terisi atau set env inline.\par
+- Jalankan perintah di PowerShell (contoh):\par
+  $env:SUPABASE_URL = 'https://your-project.supabase.co' ; $env:SUPABASE_SERVICE_ROLE_KEY = 'your_service_role_key' ; npm run supabase:migrate\par
+  Atau satu baris tanpa set env file:\par
+  SUPABASE_URL=https://your-project.supabase.co SUPABASE_SERVICE_ROLE_KEY=your_service_role_key node scripts/migrate_to_supabase.js\par
+- Skrip akan membaca semua file JSON di src/content/site/ dan melakukan upsert ke public.site_content (slug => nama file tanpa .json, data => isi JSON).\par
+\par
+Verifikasi migrasi:\par
+- Buka Supabase Dashboard -> Table Editor -> public.site_content.\par
+- Pastikan ada row untuk setiap slug: header, hero, about, businessUnits, brands, statistics, investment, sustainability, news, footer.\par
+\par
+----------------------------------------\par
+6) Perilaku API Setelah Supabase Diaktifkan\par
+----------------------------------------\par
+- Endpoint penting:\par
+  - GET /api/content?slug=<slug> — membaca konten.\par
+  - POST /api/content?slug=<slug> — menulis/menyimpan konten (perlu autentikasi admin).\par
+- Jika SUPABASE env tersedia: API akan mencoba membaca dari Supabase public.site_content terlebih dahulu; jika tidak tersedia atau gagal, fallback ke file lokal.\par
+- POST: jika Supabase tersedia, coba upsert ke Supabase. Jika gagal, jatuh kembali ke penulisan file lokal.\par
+- Autentikasi sementara (mock) tetap dipertahankan: header Authorization: Bearer ******<email>.\par
+\par
+----------------------------------------\par
+7) Mengaktifkan Supabase Auth untuk Admin (Rekomendasi)\par
+----------------------------------------\par
+Ringkasan langkah:\par
+A. Buat admin user di Supabase (Auth -> Users).\par
+B. Ganti login di /admin/login.astro untuk memanggil supabase.auth.signInWithPassword (client anon key).\par
+C. Setelah login berhasil, simpan access token (atau gunakan server-side flow dan httpOnly cookie).\par
+D. Server-side: ubah verifikasi token di /api/content (POST) untuk memverifikasi access token lewat Supabase admin client dan cek user role (dapat di table custom atau via metadata).\par
+E. Pastikan SERVICE_ROLE_KEY hanya digunakan di server (never expose to client).\par
+\par
+Contoh verifikasi server-side (pseudocode):\par
+1. Ambil header Authorization: Bearer <access_token>.\par
+2. Gunakan getSupabaseAdmin() lalu panggil supabase.auth.getUser(access_token).\par
+3. Jika user valid dan memiliki role admin, izinkan upsert.\par
+\par
+----------------------------------------\par
+8) Upload Gambar ke Supabase Storage (Ringkasan)\par
+----------------------------------------\par
+A. Buat bucket (mis. 'bambulogy-media') — pilih public atau private sesuai kebijakan.\par
+B. Upload via client (anon key) atau via server-signed URL:\par
+- Direct upload example (client):\par
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);\par
+  const { data, error } = await supabase.storage.from('bambulogy-media').upload(filePath, file);\par
+  const publicUrl = supabase.storage.from('bambulogy-media').getPublicUrl(filePath).data.publicUrl;\par
+- Untuk private bucket: server harus membuat signed URL menggunakan service role (atau admin client) dan mengembalikannya ke client.\par
+C. Best practice: lakukan verifikasi admin di server lalu minta signed upload URL untuk client.\par
+\par
+----------------------------------------\par
+9) Contoh .env (JANGAN COMMIT)\par
+----------------------------------------\par
+SUPABASE_URL=https://your-project.supabase.co\par
+SUPABASE_ANON_KEY=eyJhbGci...\par
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGci...  (SANGAT RAHASIA — HANYA DI SERVER)\par
+\par
+----------------------------------------\par
+10) Contoh Perintah & Test (Windows PowerShell friendly)\par
+----------------------------------------\par
+- Migrate (set .env atau set env inline):\par
+  $env:SUPABASE_URL='https://your-project.supabase.co' ; $env:SUPABASE_SERVICE_ROLE_KEY='your_service_role_key' ; npm run supabase:migrate\par
+- Cek API content (GET hero):\par
+  curl "http://localhost:3000/api/content?slug=hero"\par
+- Test POST update (mock auth):\par
+  curl -X POST "http://localhost:3000/api/content?slug=hero" -H "Content-Type: application/json" -H "Authorization: Bearer ******admin@bambulogygroup.com" -d "{\"title\":\"New Title\",\"subtitle\":\"New Sub\"}"\par
+\par
+----------------------------------------\par
+11) Keamanan & Best Practices\par
+----------------------------------------\par
+- Jangan commit .env yang berisi service role key.\par
+- Gunakan SERVICE_ROLE_KEY hanya di server-side.\par
+- Gunakan Supabase Auth + httpOnly cookie atau server-side session untuk admin.\par
+- Gunakan RLS dan policies jika perlu akses kontrol lebih granular.\par
+- Jangan simpan password plaintext di file users.json di production — gunakan hashed password (bcrypt) atau provider Auth.\par
+- Rotasi keys jika terdeteksi kebocoran.\par
+\par
+----------------------------------------\par
+12) Troubleshooting Umum\par
+----------------------------------------\par
+- Jika skrip migrate gagal menjalankan SQL via RPC, jalankan scripts/seed_supabase.sql manual di SQL editor Supabase.\par
+- Jika GET mengembalikan file lokal walaupun Supabase tersedia: cek apakah public.site_content memiliki row untuk slug tersebut.\par
+- Jika upload gagal karena permission: periksa bucket policy (public/private) dan apakah menggunakan anon vs signed URL.\par
+\par
+----------------------------------------\par
+13) Checklist Migrasi ke Production (Direkomendasikan)\par
+----------------------------------------\par
+[ ] Migrasi content ke Supabase\par
+[ ] Implement Supabase Auth di admin UI\par
+[ ] Implement server-side token verification + httpOnly cookies\par
+[ ] Setup RLS & policies / table users + roles\par
+[ ] Implement image upload (private bucket + signed URL)\par
+[ ] Remove plaintext users.json (atau buat emergency read-only backup)\par
+[ ] Rotate & simpan service role key di secret manager\par
+[ ] E2E test CRUD content lewat admin UI\par
+\par
+----------------------------------------\par
+14) Kontak & Bantuan Lanjutan\par
+----------------------------------------\par
+Butuh bantuan tambahan (implementasi Supabase Auth, image upload, atau menjalankan migrasi) — beri tahu opsi yang diinginkan. Saya dapat menulis skrip PowerShell siap pakai atau memperbarui admin UI untuk langsung memakai Supabase Auth.\par
+\par
+----------------------------------------\par
+Dokumentasi dibuat oleh: Copilot-assisted generator (AI assistant menggunakan Copilot CLI runtime in VS Code)\par
+Tanggal pembuatan: 2026-07-29\par
+}

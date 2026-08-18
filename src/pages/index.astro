@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Ecosystem from '../components/Ecosystem.astro';
+import Brands from '../components/Brands.astro';
+import Stats from '../components/Stats.astro';
+import Sustainability from '../components/Sustainability.astro';
+import News from '../components/News.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+
+import header from '../content/site/header.json';
+import hero from '../content/site/hero.json';
+import about from '../content/site/about.json';
+import businessUnits from '../content/site/businessUnits.json';
+import brands from '../content/site/brands.json';
+import statistics from '../content/site/statistics.json';
+import sustainability from '../content/site/sustainability.json';
+import news from '../content/site/news.json';
+import footer from '../content/site/footer.json';
+---
+<BaseLayout title="Bambulogy Group">
+  <Navbar data={header} />
+  <main class="pt-24">
+    <Hero data={hero} />
+
+    <About data={about} />
+
+    <Ecosystem data={businessUnits} />
+
+    <Brands data={brands} />
+
+    <Stats data={statistics} />
+
+    <Sustainability data={sustainability} />
+
+    <News data={news} />
+
+    <ContactCTA />
+
+    <Footer data={footer} />
+  </main>
+</BaseLayout>

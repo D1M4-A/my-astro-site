@@ -1,0 +1,96 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hero Editor — Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <script>if(!localStorage.getItem('bambulogy_admin_token')) window.location.href='/admin/login';</script>
+    <div class="flex">
+      <div class="w-64">
+        <iframe src="/admin/dashboard" style="width:100%;height:100vh;border:none;"></iframe>
+      </div>
+      <div class="flex-1 p-8">
+        <h2 class="text-2xl font-semibold mb-4">Edit Hero</h2>
+        <form id="form" class="grid grid-cols-1 gap-3 max-w-3xl">
+          <label class="text-sm text-gray-600">Title</label>
+          <input id="title" class="p-3 border rounded" />
+
+          <label class="text-sm text-gray-600">Subtitle</label>
+          <input id="subtitle" class="p-3 border rounded" />
+
+          <label class="text-sm text-gray-600">Description</label>
+          <textarea id="description" class="p-3 border rounded h-28"></textarea>
+
+          <label class="text-sm text-gray-600">Background Image URL</label>
+          <input id="backgroundImage" class="p-3 border rounded" />
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-sm text-gray-600">Primary Button Text</label>
+              <input id="pText" class="p-3 border rounded" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-600">Primary Button Link</label>
+              <input id="pLink" class="p-3 border rounded" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-sm text-gray-600">Secondary Button Text</label>
+              <input id="sText" class="p-3 border rounded" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-600">Secondary Button Link</label>
+              <input id="sLink" class="p-3 border rounded" />
+            </div>
+          </div>
+
+          <div class="mt-4 flex gap-3">
+            <button class="btn-primary">Save</button>
+            <div id="msg" class="text-sm text-green-600"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      const load = async ()=>{
+              const res = await fetch('/src/content/site/hero.json');
+        const data = await res.json();
+        document.getElementById('title').value = data.title || '';
+        document.getElementById('subtitle').value = data.subtitle || '';
+        document.getElementById('description').value = data.description || '';
+        document.getElementById('backgroundImage').value = data.backgroundImage || '';
+        document.getElementById('pText').value = data.primary?.text || '';
+        document.getElementById('pLink').value = data.primary?.link || '';
+        document.getElementById('sText').value = data.secondary?.text || '';
+        document.getElementById('sLink').value = data.secondary?.link || '';
+      };
+
+      document.getElementById('form').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const payload = {
+          title: document.getElementById('title').value,
+          subtitle: document.getElementById('subtitle').value,
+          description: document.getElementById('description').value,
+          backgroundImage: document.getElementById('backgroundImage').value,
+          primary: { text: document.getElementById('pText').value, link: document.getElementById('pLink').value },
+          secondary: { text: document.getElementById('sText').value, link: document.getElementById('sLink').value }
+        };
+        const token = localStorage.getItem('bambulogy_admin_token');
+        const res = await fetch('/api/content?slug=hero', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+token }, body: JSON.stringify(payload) });
+        const data = await res.json();
+        const msg = document.getElementById('msg');
+        if(res.ok) { msg.textContent = 'Saved'; setTimeout(()=>msg.textContent='', 2500); }
+        else msg.textContent = data.error || 'Error';
+      });
+
+      load();
+    </script>
+  </body>
+</html>

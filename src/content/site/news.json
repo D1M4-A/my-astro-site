@@ -1,0 +1,25 @@
+{
+  "articles": [
+    {
+      "id": "post-1",
+      "title": "Bambulogy announces new resort development",
+      "date": "2026-06-01",
+      "excerpt": "Launching a signature beachfront destination designed for conservation and luxury.",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
+      "category": "Announcements",
+      "content": "Bambulogy Group today announced plans for a new beachfront resort developed with sustainability and luxury in mind...",
+      "link": "/news/bambulogy-new-resort"
+    },
+    {
+      "id": "post-2",
+      "title": "Cabinite Pangalengan opens to guests",
+      "date": "2026-05-10",
+      "excerpt": "A curated glamping experience that connects guests with mountain nature.",
+      "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80",
+      "category": "News",
+      "content": "Cabinite Pangalengan opens its doors to guests seeking a unique mountain forest experience...",
+      "link": "/news/cabinite-pangalengan-opens"
+    }
+  ],
+  "cta": { "label": "See all news", "href": "/news" }
+}

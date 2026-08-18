@@ -1,0 +1,35 @@
+{
+  "title": "About Company",
+  "subtitle": "Creating sustainable value through hospitality, lifestyle, and innovation",
+  "description": "Bambulogy Group is a hospitality and resort management company that creates unique stays and curated outdoor experiences across Indonesia. We believe travel is not only about a destination but about creating meaningful memories through nature, comfort, and authentic experiences.\n\nOur mission is to develop nature-inspired destinations that combine exceptional hospitality, outdoor adventure, local culture, and sustainable tourism.",
+  "heroImage": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80",
+  "mission": "To develop nature-inspired destinations that combine exceptional hospitality, outdoor adventure, local culture, and sustainable tourism.",
+  "vision": "To be a leading steward of sustainable hospitality and lifestyle experiences that balance commercial success with social and environmental responsibility.",
+  "values": [
+    "Integrity",
+    "Sustainability",
+    "Excellence",
+    "Community Focus",
+    "Innovation"
+  ],
+  "leadership": [
+    {
+      "name": "Arjuna Putra",
+      "role": "Founder & CEO",
+      "photo": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=800&q=80",
+      "bio": "Experienced hospitality entrepreneur focused on destination development and experiential business growth."
+    },
+    {
+      "name": "Sari Lestari",
+      "role": "COO",
+      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+      "bio": "Operations leader with a background in hotel management and sustainable operations."
+    }
+  ],
+  "established": "2015",
+  "headquarters": "Bali, Indonesia",
+  "cta": {
+    "label": "Learn more",
+    "href": "/about"
+  }
+}

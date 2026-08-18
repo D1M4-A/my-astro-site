@@ -1,0 +1,27 @@
+{
+  "name": "my-astro-site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "css:build": "tailwindcss -i src/styles/global.css -o public/styles.css --minify",
+    "css:watch": "tailwindcss -i src/styles/global.css -o public/styles.css --watch",
+    "supabase:migrate": "node scripts/migrate_to_supabase.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.111.0",
+    "astro": "^7.1.5",
+    "docx": "^8.3.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,15 @@
+---
+const { data } = Astro.props;
+---
+<section id="sustainability" class="section bg-white">
+  <div class="container grid md:grid-cols-2 gap-8 items-center">
+    <div class="fade-in">
+      <img src={data?.image || 'https://images.unsplash.com/photo-1505691723518-36a5d0d28a1a?auto=format&fit=crop&w=1400&q=80'} alt="Bamboo architecture" class="w-full h-80 object-cover rounded-lg shadow-md" />
+    </div>
+    <div class="fade-in">
+      <h3 class="text-3xl font-semibold mb-4">{data?.title || 'Sustainability — People · Nature · Future'}</h3>
+      <p class="text-gray-700 mb-6">{data?.description || 'Designing with respect for place and people.'}</p>
+      <a href="#" class="btn-secondary">Learn about our approach</a>
+    </div>
+  </div>
+</section>

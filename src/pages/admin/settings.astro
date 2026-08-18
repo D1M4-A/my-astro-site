@@ -1,0 +1,71 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Settings — Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <script>if(!localStorage.getItem('bambulogy_admin_token')) window.location.href='/admin/login';</script>
+    <div class="flex">
+      <div class="w-64"><iframe src="/admin/dashboard" style="width:100%;height:100vh;border:none;"></iframe></div>
+      <div class="flex-1 p-8">
+        <h2 class="text-2xl font-semibold mb-4">User Management</h2>
+        <p class="text-gray-600 mb-4">Manage admin users who can edit site content. New users will be created with plaintext password in this mock—replace with real auth provider for production.</p>
+
+        <div class="mb-6">
+          <h3 class="font-semibold mb-2">Existing Users</h3>
+          <div id="usersList" class="grid gap-2"></div>
+        </div>
+
+        <hr class="my-6" />
+
+        <h3 class="font-semibold mb-2">Add User</h3>
+        <form id="addForm" class="grid gap-2 max-w-2xl">
+          <input id="uEmail" placeholder="Email" class="p-2 border rounded" />
+          <input id="uPass" placeholder="Password" class="p-2 border rounded" />
+          <select id="uRole" class="p-2 border rounded">
+            <option value="admin">admin</option>
+            <option value="editor">editor</option>
+          </select>
+          <button class="btn-primary">Create User</button>
+          <div id="msg" class="text-sm text-green-600"></div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      async function loadUsers(){
+        const token = localStorage.getItem('bambulogy_admin_token');
+        const res = await fetch('/api/auth/users', { headers: { 'Authorization': 'Bearer '+token }});
+        if(!res.ok){ document.getElementById('usersList').innerText = 'Unable to load users'; return; }
+        const data = await res.json();
+        const list = document.getElementById('usersList');
+        list.innerHTML = '';
+        (data.users||[]).forEach(u=>{
+          const div = document.createElement('div');
+          div.className = 'p-3 border rounded bg-white flex justify-between items-center';
+          div.innerHTML = `<div><div class="font-semibold">${u.email}</div><div class="text-xs text-gray-500">${u.role}</div></div>`;
+          list.appendChild(div);
+        });
+      }
+
+      document.getElementById('addForm').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const email = document.getElementById('uEmail').value;
+        const pass = document.getElementById('uPass').value;
+        const role = document.getElementById('uRole').value;
+        const token = localStorage.getItem('bambulogy_admin_token');
+        const res = await fetch('/api/auth/users', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+token }, body: JSON.stringify({ email, password: pass, role }) });
+        const data = await res.json();
+        const msg = document.getElementById('msg');
+        if(res.ok){ msg.textContent='User created'; setTimeout(()=>msg.textContent='',2000); document.getElementById('addForm').reset(); loadUsers(); }
+        else msg.textContent = data.error || 'Error';
+      });
+
+      loadUsers();
+    </script>
+  </body>
+</html>

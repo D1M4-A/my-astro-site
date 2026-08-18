@@ -1,0 +1,26 @@
+---
+const { data } = Astro.props;
+const bg = data?.backgroundImage || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80';
+---
+<section class="hero" style={`background-image: url('${bg}'); background-size: cover; background-position: center;`}>
+  <div class="absolute inset-0 hero-overlay"></div>
+  <div class="container relative z-20">
+    <div class="max-w-3xl text-center mx-auto text-white py-28">
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4" style="font-family: 'Playfair Display', serif;">{data?.title || 'Building Extraordinary Destinations'}</h1>
+      <p class="text-lg md:text-xl text-white/90 mb-8">{data?.subtitle || 'Connecting Hospitality, Nature, and Innovation Across Indonesia.'}</p>
+      <div class="flex items-center justify-center gap-4">
+        <a href={data?.primary?.link || '#businesses'} class="btn-primary">{data?.primary?.text || 'Explore Our Businesses'}</a>
+        <a href={data?.secondary?.link || '#about'} class="btn-secondary">{data?.secondary?.text || 'Learn More'}</a>
+      </div>
+
+      <div class="mt-12 flex justify-center">
+        <div class="animate-bounce text-white/90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="7" y="3" width="10" height="14" rx="5" />
+            <path d="M12 17v.01" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

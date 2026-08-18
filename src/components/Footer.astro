@@ -1,0 +1,51 @@
+---
+const { data } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer bg-background text-textdark">
+  <div class="container grid md:grid-cols-3 gap-6 items-start">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-[#0F2D1E] text-white flex items-center justify-center font-semibold">B</div>
+        <div>
+          <div class="font-semibold">{data?.company?.name || 'Bambulogy Group'}</div>
+          <div class="text-sm text-gray-600">Hospitality · Property · Technology</div>
+        </div>
+      </div>
+      <div class="text-sm text-gray-600">{data?.company?.description || 'Bambulogy Group is a diversified hospitality, tourism, property, lifestyle, and technology holding company.'}</div>
+      <div class="text-sm text-gray-600 mt-2">{data?.copyright || `© ${year} Bambulogy Group. All rights reserved.`}</div>
+    </div>
+
+    <div>
+      <div class="font-semibold mb-2">Contact</div>
+      <div class="text-sm text-gray-600">Address: {data?.company?.address || 'Jl. Cendrawasih V No. 125, Sawah Baru, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413.'}</div>
+      <div class="text-sm text-gray-600">Email: {data?.company?.email || 'Reservation@bambulogyIndonesia.com'}</div>
+      <div class="text-sm text-gray-600">Phone: {data?.company?.phone || '085861214132'}</div>
+    </div>
+
+    <div>
+      <div class="font-semibold mb-2">Follow</div>
+      <div class="flex flex-wrap gap-3 text-gray-600">
+        {(data?.social?.length ? data.social : [{ name: 'LinkedIn' }, { name: 'Instagram' }, { name: 'Facebook' }]).map(item => (
+          <span>{item.name}</span>
+        ))}
+      </div>
+      <div class="mt-4">
+        {
+          Array.isArray(data?.links)
+            ? data.links.map(link => (
+                <a href={link.link || link.href} class="block text-sm text-gray-600">{link.label || link.label}</a>
+              ))
+            : Object.keys(data?.links || {}).map(group => (
+                <div class="mb-3">
+                  <div class="font-semibold text-sm mb-1">{group}</div>
+                  {(data.links[group] || []).map(item => (
+                    <a href={item.href} class="block text-sm text-gray-600">{item.label}</a>
+                  ))}
+                </div>
+              ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,41 @@
+---
+---
+<aside class="w-64 bg-white min-h-screen border-r border-[#EFECE4] p-6">
+  <div class="mb-6">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded bg-[#0F2D1E] text-white flex items-center justify-center font-semibold">B</div>
+      <div>
+        <div class="font-semibold">Bambulogy Admin</div>
+        <div class="text-xs text-gray-500">Content & settings</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="flex flex-col gap-2 text-sm">
+    <a href="/admin/dashboard" class="p-2 rounded hover:bg-[#F3EFE6]">Dashboard</a>
+    <a href="/admin/header" class="p-2 rounded hover:bg-[#F3EFE6]">Header</a>
+    <a href="/admin/hero" class="p-2 rounded hover:bg-[#F3EFE6]">Hero</a>
+    <a href="/admin/about" class="p-2 rounded hover:bg-[#F3EFE6]">About</a>
+    <a href="/admin/business-units" class="p-2 rounded hover:bg-[#F3EFE6]">Business Units</a>
+    <a href="/admin/brands" class="p-2 rounded hover:bg-[#F3EFE6]">Brands</a>
+    <a href="/admin/statistics" class="p-2 rounded hover:bg-[#F3EFE6]">Statistics</a>
+    <a href="/admin/sustainability" class="p-2 rounded hover:bg-[#F3EFE6]">Sustainability</a>
+    <a href="/admin/news" class="p-2 rounded hover:bg-[#F3EFE6]">News</a>
+    <a href="/admin/footer" class="p-2 rounded hover:bg-[#F3EFE6]">Footer</a>
+    <a href="/admin/settings" class="p-2 rounded hover:bg-[#F3EFE6]">Settings</a>
+  </nav>
+
+  <div class="mt-6">
+    <button id="logoutBtn" class="w-full text-left p-2 rounded border border-[#EDE8DB]">Logout</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const btn = document.getElementById('logoutBtn');
+      btn?.addEventListener('click', ()=>{
+        localStorage.removeItem('bambulogy_admin_token');
+        window.location.href = '/admin/login';
+      });
+    });
+  </script>
+</aside>

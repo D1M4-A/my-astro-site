@@ -1,0 +1,17 @@
+{
+  "title": "Investing in Experiences, Destinations, and the Future",
+  "description": "Bambulogy Group invites strategic partners and investors to join curated growth opportunities across hospitality, property, and technology ventures.",
+  "backgroundImage": "https://images.unsplash.com/photo-1542223616-6b5f95d1b9de?auto=format&fit=crop&w=1600&q=80",
+  "overview": "We pursue long-term, value-driven investments focused on resilient hospitality assets, differentiated brands, and technology that enhances guest experience.",
+  "strategy": [
+    "Opportunistic buy-and-build for resort and mixed-use assets",
+    "Early-stage backing for hospitality-led brand concepts",
+    "Active asset management and operational improvements"
+  ],
+  "portfolioHighlights": [
+    { "name": "Adem Anyer Park", "type": "Resort", "region": "West Java", "link": "/brands/adem-anyer-park" },
+    { "name": "Cabinite Pangalengan", "type": "Glamping", "region": "West Java", "link": "/brands/cabinite-pangalengan" }
+  ],
+  "cta": { "text": "Download Investment Profile", "link": "/Bambulogy-Investment-Profile.pdf" },
+  "contact": { "email": "invest@bambulogy.example", "phone": "+62 361 000 000" }
+}

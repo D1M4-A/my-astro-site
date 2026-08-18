@@ -1,0 +1,13 @@
+{
+  "headline": "By the numbers",
+  "summary": "Performance and impact metrics that represent the group's scale and ambition.",
+  "stats": [
+    { "id": "guests", "number": "100,000+", "label": "Guests served", "description": "Hospitality guests across our destinations." },
+    { "id": "rooms", "number": 860, "label": "Rooms & villas", "description": "Total keys across operating properties." },
+    { "id": "brands", "number": 8, "label": "Active brands", "description": "Hospitality, F&B and lifestyle brands." },
+    { "id": "years", "number": 11, "label": "Years operating", "description": "Track record since establishment." },
+    { "id": "partners", "number": 45, "label": "Local partners", "description": "Vetted community and supply-chain partners." }
+  ],
+  "updated": "2026-01-01",
+  "cta": { "label": "View annual report", "href": "/reports/annual" }
+}

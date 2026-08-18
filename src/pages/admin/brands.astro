@@ -1,0 +1,83 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brands — Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <script>if(!localStorage.getItem('bambulogy_admin_token')) window.location.href='/admin/login';</script>
+    <div class="flex">
+      <div class="w-64"><iframe src="/admin/dashboard" style="width:100%;height:100vh;border:none;"></iframe></div>
+      <div class="flex-1 p-8">
+        <h2 class="text-2xl font-semibold mb-4">Brands</h2>
+        <div id="list" class="grid gap-4"></div>
+        <hr class="my-6" />
+        <h3 class="font-semibold mb-2">Add Brand</h3>
+        <form id="addForm" class="grid gap-2 max-w-2xl">
+          <input id="bName" placeholder="Brand Name" class="p-2 border rounded" />
+          <input id="bDesc" placeholder="Short Description" class="p-2 border rounded" />
+          <input id="bImage" placeholder="Image URL" class="p-2 border rounded" />
+          <input id="bLink" placeholder="Brand Link" class="p-2 border rounded" />
+          <button class="btn-primary">Add Brand</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      async function load(){
+        const res = await fetch('/src/content/site/brands.json');
+        const data = await res.json();
+        const list = document.getElementById('list');
+        list.innerHTML = '';
+        data.brands.forEach(b=>{
+          const div = document.createElement('div');
+          div.className = 'p-4 border rounded bg-white';
+          div.innerHTML = `<div class="flex justify-between items-start"><div><div class="font-semibold">${b.name}</div><div class="text-sm text-gray-600">${b.description}</div></div><div><button data-id="${b.id}" class="editBtn p-1 text-sm border rounded">Edit</button> <button data-id="${b.id}" class="delBtn p-1 text-sm border rounded">Delete</button></div></div>`;
+          list.appendChild(div);
+        });
+
+        document.querySelectorAll('.delBtn').forEach(btn=>btn.addEventListener('click', async (e)=>{
+          const id = e.target.dataset.id;
+          data.brands = data.brands.filter(x=>x.id!==id);
+          const token = localStorage.getItem('bambulogy_admin_token');
+                    await fetch('/api/content?slug=brands', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+token }, body: JSON.stringify(data) });
+          load();
+        }));
+
+        document.querySelectorAll('.editBtn').forEach(btn=>btn.addEventListener('click', async (e)=>{
+          const id = e.target.dataset.id;
+          const brand = data.brands.find(x=>x.id===id);
+          const newTitle = prompt('Name', brand.name);
+          if(newTitle==null) return;
+          const newDesc = prompt('Description', brand.description);
+          brand.name = newTitle;
+          brand.description = newDesc;
+          const token = localStorage.getItem('bambulogy_admin_token');
+                    await fetch('/api/content?slug=brands', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+token }, body: JSON.stringify(data) });
+          load();
+        }));
+      }
+
+      document.getElementById('addForm').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const name = document.getElementById('bName').value;
+        const desc = document.getElementById('bDesc').value;
+        const image = document.getElementById('bImage').value;
+        const link = document.getElementById('bLink').value || '#';
+        const res = await fetch('/src/content/site/brands.json');
+        const data = await res.json();
+        const id = 'brand-'+Date.now();
+        data.brands.push({ id, name, description: desc, image, link });
+        const token = localStorage.getItem('bambulogy_admin_token');
+        await fetch('/api/content/brands', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+token }, body: JSON.stringify(data) });
+        document.getElementById('addForm').reset();
+        load();
+      });
+
+      load();
+    </script>
+  </body>
+</html>
