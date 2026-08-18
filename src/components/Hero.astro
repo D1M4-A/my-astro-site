@@ -1,16 +1,35 @@
 ---
+import { getCurrentLanguage } from '../lib/i18n';
+
+const lang = getCurrentLanguage();
 const { data } = Astro.props;
 const bg = data?.backgroundImage || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80';
+
+const heroTitle = lang === 'en' 
+  ? data?.title || 'Building Extraordinary Destinations'
+  : data?.titleId || 'Membangun Destinasi Luar Biasa';
+
+const heroSubtitle = lang === 'en'
+  ? data?.subtitle || 'Connecting Hospitality, Nature, and Innovation Across Indonesia.'
+  : data?.subtitleId || 'Menghubungkan Perhotelan, Alam, dan Inovasi di Seluruh Indonesia.';
+
+const primaryText = lang === 'en'
+  ? data?.primary?.text || 'Explore Our Businesses'
+  : data?.primary?.textId || 'Jelajahi Bisnis Kami';
+
+const secondaryText = lang === 'en'
+  ? data?.secondary?.text || 'Learn More'
+  : data?.secondary?.textId || 'Pelajari Lebih Lanjut';
 ---
 <section class="hero" style={`background-image: url('${bg}'); background-size: cover; background-position: center;`}>
   <div class="absolute inset-0 hero-overlay"></div>
   <div class="container relative z-20">
     <div class="max-w-3xl text-center mx-auto text-white py-28">
-      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4" style="font-family: 'Playfair Display', serif;">{data?.title || 'Building Extraordinary Destinations'}</h1>
-      <p class="text-lg md:text-xl text-white/90 mb-8">{data?.subtitle || 'Connecting Hospitality, Nature, and Innovation Across Indonesia.'}</p>
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4" style="font-family: 'Playfair Display', serif;">{heroTitle}</h1>
+      <p class="text-lg md:text-xl text-white/90 mb-8">{heroSubtitle}</p>
       <div class="flex items-center justify-center gap-4">
-        <a href={data?.primary?.link || '#businesses'} class="btn-primary">{data?.primary?.text || 'Explore Our Businesses'}</a>
-        <a href={data?.secondary?.link || '#about'} class="btn-secondary">{data?.secondary?.text || 'Learn More'}</a>
+        <a href={data?.primary?.link || '#businesses'} class="btn-primary">{primaryText}</a>
+        <a href={data?.secondary?.link || '#about'} class="btn-secondary">{secondaryText}</a>
       </div>
 
       <div class="mt-12 flex justify-center">

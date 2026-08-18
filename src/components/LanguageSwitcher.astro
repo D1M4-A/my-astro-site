@@ -1,0 +1,52 @@
+---
+// Language switcher component for navbar
+---
+<div class="language-switcher" id="language-switcher">
+  <button
+    class="language-toggle inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E6E1DA] hover:bg-[#F8F5F0] transition"
+    aria-label="Toggle language"
+  >
+    <span class="language-flag">🇬🇧</span>
+    <span class="language-code text-sm font-medium">EN</span>
+  </button>
+</div>
+
+<script>
+  import { getCurrentLanguage, setLanguage, toggleLanguage } from '../lib/i18n';
+
+  const switcher = document.getElementById('language-switcher');
+  const button = switcher?.querySelector('.language-toggle') as HTMLButtonElement;
+  const flag = switcher?.querySelector('.language-flag') as HTMLSpanElement;
+  const code = switcher?.querySelector('.language-code') as HTMLSpanElement;
+
+  function updateLanguageDisplay() {
+    const lang = getCurrentLanguage();
+    if (flag && code) {
+      flag.textContent = lang === 'en' ? '🇬🇧' : '🇮🇩';
+      code.textContent = lang === 'en' ? 'EN' : 'ID';
+    }
+  }
+
+  if (button) {
+    button.addEventListener('click', () => {
+      const newLang = toggleLanguage();
+      updateLanguageDisplay();
+      // Reload page to update all content
+      location.reload();
+    });
+  }
+
+  // Initialize display on page load
+  updateLanguageDisplay();
+
+  // Listen for language changes from other components
+  window.addEventListener('languageChange', () => {
+    updateLanguageDisplay();
+  });
+</script>
+
+<style>
+  .language-switcher {
+    display: inline-block;
+  }
+</style>

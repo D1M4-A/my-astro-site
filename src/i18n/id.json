@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "businesses": "Bisnis",
+    "contact": "Kontak",
+    "login": "Masuk"
+  },
+  "hero": {
+    "title": "Selamat Datang di Bambulogy Group",
+    "subtitle": "Solusi Inovatif untuk Perhotelan & Pariwisata",
+    "cta": "Jelajahi Lebih Lanjut"
+  },
+  "about": {
+    "title": "Tentang Bambulogy",
+    "description": "Memimpin perjalanan dalam perhotelan berkelanjutan dan pengembangan destinasi di seluruh Asia Tenggara."
+  },
+  "ecosystem": {
+    "label": "Destinasi Kami",
+    "title": "Temukan Tempat-Tempat Bambulogy",
+    "viewAll": "Lihat semua pengalaman",
+    "exploreDestination": "Jelajahi Destinasi →"
+  },
+  "businessUnits": {
+    "hospitality": {
+      "title": "Perhotelan",
+      "description": "Pengalaman perhotelan destinasi berkelas dunia, vila, dan resort.",
+      "highlights": ["Operasional resort", "Konsep makanan & minuman", "Desain pengalaman tamu"]
+    },
+    "resort": {
+      "title": "Resort & Pariwisata",
+      "description": "Pengalaman pariwisata kurasi dan destinasi resort unggulan.",
+      "highlights": ["Pemrograman destinasi", "Kemitraan lokal", "Tur pengalaman"]
+    },
+    "property": {
+      "title": "Pengembangan Properti",
+      "description": "Rencana induk resort dan investasi properti mewah dengan nilai jangka panjang.",
+      "highlights": ["Perencanaan induk", "Pengembangan penggunaan campuran", "Manajemen aset"]
+    },
+    "technology": {
+      "title": "Solusi Teknologi",
+      "description": "Inovasi yang meningkatkan pengalaman tamu dan keunggulan operasional.",
+      "highlights": ["Perjalanan digital tamu", "Analitik operasional", "Integrasi teknologi properti"]
+    }
+  },
+  "stats": {
+    "title": "Berdasarkan Angka"
+  },
+  "sustainability": {
+    "title": "Keberlanjutan",
+    "description": "Berkomitmen pada tanggung jawab lingkungan dan sosial."
+  },
+  "news": {
+    "title": "Berita Terbaru",
+    "readMore": "Baca Selengkapnya"
+  },
+  "footer": {
+    "copyright": "© 2024 Bambulogy Group. Semua hak dilindungi."
+  }
+}

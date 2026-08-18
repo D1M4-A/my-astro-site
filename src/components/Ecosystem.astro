@@ -1,20 +1,24 @@
 ---
+import { t, getCurrentLanguage } from '../lib/i18n';
+
+const lang = getCurrentLanguage();
+
 const destinations = [
   {
-    title: 'Adem Anyer Park',
-    subtitle: 'Beachfront Escape for Families, Communities, and Corporate Gatherings.',
-    description: 'A coastal destination offering cabins, glamping, campervan areas, and event spaces designed for unforgettable family and corporate experiences.',
+    title: lang === 'en' ? 'Adem Anyer Park' : 'Adem Anyer Park',
+    subtitle: lang === 'en' ? 'Beachfront Escape for Families, Communities, and Corporate Gatherings.' : 'Pelarian Tepi Pantai untuk Keluarga, Komunitas, dan Acara Korporat.',
+    description: lang === 'en' ? 'A coastal destination offering cabins, glamping, campervan areas, and event spaces designed for unforgettable family and corporate experiences.' : 'Destinasi pesisir yang menawarkan kabin, glamping, area campervan, dan ruang acara yang dirancang untuk pengalaman keluarga dan korporat yang tak terlupakan.',
     href: '/destinations/adem-anyer-park',
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80',
-    badge: 'Beachfront Resort'
+    badge: lang === 'en' ? 'Beachfront Resort' : 'Resort Tepi Pantai'
   },
   {
-    title: 'Cabinite Pangalengan',
-    subtitle: 'Private Mountain Cabins Surrounded by Nature.',
-    description: 'An exclusive retreat in the cool highlands with pine forest views, outdoor activities, and memorable nature-based gatherings.',
+    title: lang === 'en' ? 'Cabinite Pangalengan' : 'Cabinite Pangalengan',
+    subtitle: lang === 'en' ? 'Private Mountain Cabins Surrounded by Nature.' : 'Kabin Gunung Pribadi Dikelilingi Alam.',
+    description: lang === 'en' ? 'An exclusive retreat in the cool highlands with pine forest views, outdoor activities, and memorable nature-based gatherings.' : 'Retret eksklusif di dataran tinggi yang sejuk dengan pemandangan hutan pinus, aktivitas outdoor, dan pertemuan berbasis alam yang berkesan.',
     href: '/destinations/cabinite-pangalengan',
     image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80',
-    badge: 'Mountain Retreat'
+    badge: lang === 'en' ? 'Mountain Retreat' : 'Retret Gunung'
   }
 ];
 ---
@@ -22,11 +26,11 @@ const destinations = [
   <div class="container">
     <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div>
-        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#6A7A61]">Our destinations</p>
-        <h3 class="text-3xl md:text-5xl font-bold text-[#102920]">Discover Bambulogy Places</h3>
+        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#6A7A61]">{lang === 'en' ? 'Our destinations' : 'Destinasi Kami'}</p>
+        <h3 class="text-3xl md:text-5xl font-bold text-[#102920]">{lang === 'en' ? 'Discover Bambulogy Places' : 'Temukan Tempat-Tempat Bambulogy'}</h3>
       </div>
       <a href="/destinations/adem-anyer-park" class="inline-flex items-center gap-2 text-sm font-semibold text-[#102920] transition hover:text-[#264e3f]">
-        View all experiences
+        {lang === 'en' ? 'View all experiences' : 'Lihat semua pengalaman'}
         <span aria-hidden="true">→</span>
       </a>
     </div>
@@ -35,7 +39,7 @@ const destinations = [
       {destinations.map((item) => (
         <a
           href={item.href}
-          class="group relative block overflow-hidden rounded-[30px] border border-[#E7E1D5] bg-white shadow-[0_20px_60px_rgba(19,33,27,0.08)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_28px_80px_rgba(19,33,27,0.14)]"
+          class="group relative block overflow-hidden rounded-[30px] border border-[#E7E1D5] bg-white shadow-[0_20px_60px_rgba(19,33,27,0.08)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_40px_80px_rgba(19,33,27,0.12)]"
         >
           <div class="relative overflow-hidden">
             <img
@@ -56,7 +60,7 @@ const destinations = [
 
             <div class="mt-6 flex items-center justify-between gap-4">
               <span class="inline-flex items-center justify-center rounded-full bg-[#102920] px-5 py-3 text-sm font-semibold text-white transition group-hover:bg-[#234a3b]">
-                Explore Destination →
+                {lang === 'en' ? 'Explore Destination →' : 'Jelajahi Destinasi →'}
               </span>
             </div>
           </div>

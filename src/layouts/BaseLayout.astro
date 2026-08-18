@@ -1,4 +1,5 @@
 ---
+import I18nProvider from '../components/I18nProvider.astro';
 const { title = 'Bambulogy Group', description = 'Bambulogy Group — Building extraordinary destinations that connect hospitality, nature, and technology across Indonesia.' } = Astro.props;
 ---
 <!doctype html>
@@ -15,6 +16,7 @@ const { title = 'Bambulogy Group', description = 'Bambulogy Group — Building e
     <title>{title}</title>
   </head>
   <body class="bg-background text-textdark">
+    <I18nProvider />
     <slot />
     <script>
       // Simple scroll reveal for .fade-in elements

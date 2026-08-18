@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Home",
+    "businesses": "Businesses",
+    "contact": "Contact",
+    "login": "Login"
+  },
+  "hero": {
+    "title": "Welcome to Bambulogy Group",
+    "subtitle": "Innovative Solutions for Hospitality & Tourism",
+    "cta": "Explore More"
+  },
+  "about": {
+    "title": "About Bambulogy",
+    "description": "Leading the way in sustainable hospitality and destination development across Southeast Asia."
+  },
+  "ecosystem": {
+    "label": "Our Destinations",
+    "title": "Discover Bambulogy Places",
+    "viewAll": "View all experiences",
+    "exploreDestination": "Explore Destination →"
+  },
+  "businessUnits": {
+    "hospitality": {
+      "title": "Hospitality",
+      "description": "World-class resorts, villas and destination hospitality experiences.",
+      "highlights": ["Resort operations", "F&B concepts", "Guest experience design"]
+    },
+    "resort": {
+      "title": "Resort & Tourism",
+      "description": "Curated tourism experiences and signature resort destinations.",
+      "highlights": ["Destination programming", "Local partnerships", "Experiential tours"]
+    },
+    "property": {
+      "title": "Property Development",
+      "description": "Resort masterplans and luxury property investments with long-term value.",
+      "highlights": ["Masterplanning", "Mixed-use development", "Asset management"]
+    },
+    "technology": {
+      "title": "Technology Solutions",
+      "description": "Innovations that enhance guest experience and operational excellence.",
+      "highlights": ["Digital guest journeys", "Operational analytics", "Property tech integrations"]
+    }
+  },
+  "stats": {
+    "title": "By The Numbers"
+  },
+  "sustainability": {
+    "title": "Sustainability",
+    "description": "Committed to environmental and social responsibility."
+  },
+  "news": {
+    "title": "Latest News",
+    "readMore": "Read More"
+  },
+  "footer": {
+    "copyright": "© 2024 Bambulogy Group. All rights reserved."
+  }
+}
